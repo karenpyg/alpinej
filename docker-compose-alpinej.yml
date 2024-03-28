@@ -14,6 +14,7 @@ services:
       - "22:22"
       - "80:80"
     command: sh -c "apk add --no-cache openssh httpd && echo 'c:$6$rounds=656000$22111357$zQFq82.bvj4VjJ8Z5d5Q6zqdXz.d/QFQKqVcJ9kZb5p3.kXu5vTZ1uQwYRvTaQv3bv3zg.' | chpasswd && mkdir -p /root/.ssh && chmod 700 /root/.ssh && ssh-keygen -A && rc-service sshd start && rc-service httpd start && tail -f /var/log/httpd/access.log"
+
     environment:
       - PUID=1000
       - PGID=1000
