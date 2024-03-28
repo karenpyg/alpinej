@@ -10,10 +10,10 @@ services:
       - /home/c/Code/docker/alpinej:/var/www/localhost/htdocs
       - /home/c/Code/docker/alpinej/logs:/var/log
     networks:
-      alpineNetwork:
+      Network:
         ipv4_address: 172.20.0.2
     ports:
-      - "22:22"
+      - "24:22"
       - "21022:22"
       - "80:80"
     environment:
@@ -27,7 +27,7 @@ services:
         max-file: "3"
 
 networks:
-  alpineNetwork:
+  Network:
     driver: bridge
     ipam:
       config:
