@@ -15,7 +15,6 @@ services:
     ports:
       - "24:22"
       - "21022:22"
-      - "80:80"
     environment:
       - PUID=1000
       - PGID=1000
