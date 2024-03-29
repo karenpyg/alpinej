@@ -1,16 +1,18 @@
-version: '3.9'  # Use version 3.9 or higher
+version: '3.9'
 
 services:
   alpined:
     build:
       context: .
-      dockerfile: Dockerfile-02
-      
+      dockerfile: Dockerfile-04
+
     container_name: alpined
     ports:
-      - "21022:22"
-      - "21023:22"
+      - "21022:21022"
+      - "21023:21023"
       - "8088:80"
+    volumes:
+      - alpine_data:/var/www/html
     networks:
       net_work:
         ipv4_address: 172.20.0.2
@@ -21,4 +23,7 @@ networks:
     ipam:
       config:
         - subnet: 172.20.0.0/16
-          gateway: 172.20.0.1  # Add the gateway configuration
+          gateway: 172.20.0.1
+
+volumes:
+  alpine_data:

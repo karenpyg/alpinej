@@ -1,0 +1,23 @@
+FROM alpine:latest
+
+# Set environment variables (replace password with your desired one)
+ENV USERNAME c
+ENV PASSWORD 22111357
+
+# Install packages
+RUN apk add --no-cache openssh
+
+# Create user and set password
+RUN adduser -D -s /bin/sh $USERNAME && \
+    echo "$USERNAME:$PASSWORD" | chpasswd
+
+# Configure SSH (replace ports with your desired values)
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
+    sed -i 's/Port 22/Port 21022/g' /etc/ssh/sshd_config && \
+    echo "Port 21023" >> /etc/ssh/sshd_config
+
+# Expose ports
+EXPOSE 21022 21023 8088
+
+# Start SSH daemon in the foreground
+CMD ["/usr/sbin/sshd", "-D"]
