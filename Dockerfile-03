@@ -1,0 +1,59 @@
+
+FROM alpine:latest
+
+# Set environment variables (replace password with your desired one)
+ENV USERNAME c
+ENV PASSWORD 22111357 
+
+
+RUN apk add --no-cache openrc openssh 
+
+# RUN apk add --no-cache nginx 
+
+RUN adduser -D -s /bin/bash $USERNAME && \
+    echo "$USERNAME:$PASSWORD" | chpasswd
+
+# Configure SSH (replace ports with your desired values)
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
+    sed -i 's/Port 22/Port 21022/' /etc/ssh/sshd_config && \
+    echo "Port 21023" >> /etc/ssh/sshd_config
+
+# Expose ports
+EXPOSE 21022 21023 80  
+
+# Persist data volume (adjust if needed)
+VOLUME /var/www/html
+
+# Start SSH daemon
+CMD ["rc-service", "sshd", "start"]
+
+# CMD ["nginx", "-g", "daemon off;"]
+
+# FROM alpine:latest
+
+# # Set environment variables (replace password with your desired one)
+# ENV USERNAME c
+# ENV PASSWORD 22111357  # Don't store passwords in plain text, consider using environment variables from outside Docker
+
+# RUN apk add --no-cache openssh httpd
+
+# RUN adduser -D -s /bin/bash $USERNAME && \
+#     echo "$USERNAME:$PASSWORD" | chpasswd
+
+# # Configure SSH (replace ports with your desired values)
+# RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
+#     sed -i 's/Port 22/Port 21022/' /etc/ssh/sshd_config && \
+#     echo "Port 21023" >> /etc/ssh/sshd_config
+
+# # Expose ports
+# EXPOSE 21022 21023 80  # Expose SSH and potentially a web server (port 80)
+
+# # Persist data volume
+# VOLUME /var/www/html
+
+# # Start SSH daemon
+# CMD ["rc-service", "sshd", "start"]
+
+# # Optional: Start a web server (adjust based on your needs)
+# CMD ["rc-service", "httpd", "start"]
+

@@ -1,0 +1,24 @@
+version: '3.9'  # Use version 3.9 or higher
+
+services:
+  alpined:
+    build:
+      context: .
+      dockerfile: Dockerfile-02
+      
+    container_name: alpined
+    ports:
+      - "21022:22"
+      - "21023:22"
+      - "8088:80"
+    networks:
+      net_work:
+        ipv4_address: 172.20.0.2
+
+networks:
+  net_work:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1  # Add the gateway configuration

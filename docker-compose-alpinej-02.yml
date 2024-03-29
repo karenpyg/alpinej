@@ -3,12 +3,12 @@ services:
   alpinej:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-02
     container_name: alpinej
     volumes:
-      - /home/c/Code/docker/alpinej:/root/.ssh
-      - /home/c/Code/docker/alpinej:/var/www/localhost/htdocs
-      - /home/c/Code/docker/alpinej/logs:/var/log
+      - /home/d/Code/docker/alpinej:/root/.ssh
+      - /home/d/Code/docker/alpinej:/var/www/localhost/htdocs
+      - /home/d/Code/docker/alpinej/logs:/var/log
     networks:
       Network:
         ipv4_address: 172.20.0.2
