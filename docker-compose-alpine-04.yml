@@ -2,10 +2,7 @@ version: '3.9'  # Use version 3.9 or higher
 
 services:
   alpined:
-    build:
-      context: .
-      dockerfile: Dockerfile-02
-      
+    image: alpine:latest
     container_name: alpined
     ports:
       - "21022:22"
@@ -22,3 +19,4 @@ networks:
       config:
         - subnet: 172.20.0.0/16
           gateway: 172.20.0.1  # Add the gateway configuration
+
