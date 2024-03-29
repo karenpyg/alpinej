@@ -1,0 +1,20 @@
+FROM alpine:latest 
+
+
+ENV USERNAME c
+ENV PASSWORD 22111357
+
+RUN apk add --no-cache openrc openssh
+
+# CMD ["rc-service", "sshd", "start"]
+
+# CMD ["sh", "-c", "rc-service sshd start"]
+
+
+# Optional: Add user (replace username and password)
+RUN adduser -D -s /bin/sh $USERNAME && \
+    echo "$USERNAME:$PASSWORD" | chpasswd
+
+RUN ssh-keygen -A
+
+CMD ["/usr/sbin/sshd", "-D"]
