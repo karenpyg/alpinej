@@ -8,7 +8,7 @@ services:
 
     container_name: alpined
     ports:
-      - "21022:21022"
+      - "21022:22"
       - "21023:21023"
       - "8088:80"
     volumes:

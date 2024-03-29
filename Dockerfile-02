@@ -17,4 +17,6 @@ RUN adduser -D -s /bin/sh $USERNAME && \
 
 RUN ssh-keygen -A
 
+EXPOSE 21022 21023 8088
+
 CMD ["/usr/sbin/sshd", "-D"]
