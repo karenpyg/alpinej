@@ -9,6 +9,7 @@ RUN apk add --no-cache openrc openssh
 # CMD ["rc-service", "sshd", "start"]
 
 # CMD ["sh", "-c", "rc-service sshd start"]
+RUN echo "root:$PASSWORD" | chpasswd
 
 
 # Optional: Add user (replace username and password)
@@ -17,6 +18,8 @@ RUN adduser -D -s /bin/sh $USERNAME && \
 
 RUN ssh-keygen -A
 
+
 EXPOSE 21022 21023 8088
 
 CMD ["/usr/sbin/sshd", "-D"]
+
